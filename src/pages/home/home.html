@@ -1,17 +1,29 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>首页</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+  <h1 class = "title">是啥颜色</h1>
+  <!--数值绑定-->
+  <p class="alert" [style.background]="isShown?'black':'blue'">{{2+3}}</p>
+  <h3>{{title}}</h3>
+  <label>输入框<input style="border:1px solid #000000" type="text" [(ngModel)]="title"></label>
+
+  <!--*ngIf用法-->
+  <p [class.alert]="isShown" *ngIf="isShown">看得到我</p>
+  <p *ngIf="!isShown">看不到我</p>
+  <p *ngIf="names.length>0" [style.font-size.em]="isShown ? 2:1">下面是数组，长度为{{names.length}}</p>
+
+  <!--*ngFor用法-->
+  <ul>
+    <li *ngFor="let item of names;index as i">
+      {{i+item}}
+    </li>
+  </ul>
+
+  <button class="btn-primary" (click)="onChangeTitle()">点击</button>
+  <button class="btn-primary" (click)="toLazyLoadPage()">跳转到懒加载界面</button>
+  <button class="btn-primary" (click)="toNormalLoadPage()">跳转到非懒加载界面</button>
 </ion-content>
