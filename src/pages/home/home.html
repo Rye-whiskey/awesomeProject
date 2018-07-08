@@ -5,25 +5,30 @@
 </ion-header>
 
 <ion-content>
-  <h1 class = "title">是啥颜色</h1>
-  <!--数值绑定-->
-  <p class="alert" [style.background]="isShown?'black':'blue'">{{2+3}}</p>
-  <h3>{{title}}</h3>
-  <label>输入框<input style="border:1px solid #000000" type="text" [(ngModel)]="title"></label>
+  <ion-slides autoplay="3000" loop=true pager=true class="ion-slides">
+  <ion-slide *ngFor="let item of slidesItems">
+    <img src="{{item.src}}" class="slide-image">
+  </ion-slide>
 
-  <!--*ngIf用法-->
-  <p [class.alert]="isShown" *ngIf="isShown">看得到我</p>
-  <p *ngIf="!isShown">看不到我</p>
-  <p *ngIf="names.length>0" [style.font-size.em]="isShown ? 2:1">下面是数组，长度为{{names.length}}</p>
+  
+  </ion-slides>
 
-  <!--*ngFor用法-->
-  <ul>
-    <li *ngFor="let item of names;index as i">
-      {{i+item}}
-    </li>
-  </ul>
+<div class="slides-header" pager="false" #sliderHeader>
+  <ion-slides #ionSlides id="menu">
+    <ion-slide *ngFor="let nav of navContent" (click)="ionSlideDidClick(nav.id)">
+      <div class="nav-name">{{nav.name}}</div>
+    </ion-slide>
+  </ion-slides>
+</div>
 
-  <button class="btn-primary" (click)="onChangeTitle()">点击</button>
-  <button class="btn-primary" (click)="toLazyLoadPage()">跳转到懒加载界面</button>
-  <button class="btn-primary" (click)="toNormalLoadPage()">跳转到非懒加载界面</button>
+<div class="row">
+  <ion-row type="card" class="ion-row" *ngFor="let nav of picitems">
+  
+    <img src="{{nav.src}}">
+ 
+  </ion-row>
+  
+</div>
+
+  
 </ion-content>
